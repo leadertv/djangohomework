@@ -1,14 +1,67 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+<!-- Займёмся украшательствами -->
 <head>
     <meta charset="UTF-8">
     <title>Домашняя страница</title>
+    <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
 </head>
 <body>
-    <h1>Выберите раздел</h1>
-    {% for title, url in pages.items %}
-        <a href="{{ url }}">{{ title }}</a>
-        <br>
-    {% endfor %}
+    <div class="nav">
+        <h1>Выберите раздел</h1>
+        <a href="/">Главная страница</a><br>
+        {% for title, url in pages.items %}
+            {% if title != "Главная страница" %}
+                <a href="javascript:void(0);" onclick="openModal('{{ title }}', '{{ url }}')">{{ title }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <pre id="modalMessage">Содержимое модального окна</pre>
+        </div>
+    </div>
+
+    <!-- ДЛЯ КРАСОТЫ И ЭСТЕТИКИ -->
+    <script>
+        function openModal(title, url) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("modalMessage").innerText = data;
+                    document.getElementById("myModal").style.display = "block";
+                    document.body.classList.add("modal-open");
+                    setTimeout(() => {
+                        document.getElementById("myModal").style.opacity = "1";
+                    }, 10);
+                })
+                .catch(error => {
+                    document.getElementById("modalMessage").innerText = "Ошибка: " + error;
+                    document.getElementById("myModal").style.display = "block";
+                    document.body.classList.add("modal-open");
+                    setTimeout(() => {
+                        document.getElementById("myModal").style.opacity = "1";
+                    }, 10);
+                });
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.opacity = "0";
+            document.body.classList.remove("modal-open");
+            setTimeout(() => {
+                document.getElementById("myModal").style.display = "none";
+            }, 300);
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("myModal");
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>
