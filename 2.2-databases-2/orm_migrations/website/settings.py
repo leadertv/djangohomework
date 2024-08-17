@@ -73,12 +73,15 @@ WSGI_APPLICATION = 'website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'netology_orm_migrations',
+        'NAME': 'vkinder',
+        'USER': 'postgres',
+        'PASSWORD': '619620qazwsx',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
 
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField' # Нафиг надо?
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
