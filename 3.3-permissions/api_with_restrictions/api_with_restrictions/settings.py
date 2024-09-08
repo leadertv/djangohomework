@@ -74,9 +74,9 @@ TEMPLATES = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-    ]
+    ),
 }
 
 WSGI_APPLICATION = 'api_with_restrictions.wsgi.application'
@@ -88,7 +88,9 @@ WSGI_APPLICATION = 'api_with_restrictions.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'netology_classified_ads',
+        'NAME': 'vkinder',
+        'USER': 'postgres',
+        'PASSWORD': '619620qazwsx',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
