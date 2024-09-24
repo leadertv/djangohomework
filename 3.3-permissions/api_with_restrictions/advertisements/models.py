@@ -4,14 +4,12 @@ from django.db import models
 
 class AdvertisementStatusChoices(models.TextChoices):
     """Статусы объявления."""
-
     OPEN = "OPEN", "Открыто"
     CLOSED = "CLOSED", "Закрыто"
 
 
 class Advertisement(models.Model):
     """Объявление."""
-
     title = models.TextField()
     description = models.TextField(default='')
     status = models.TextField(
